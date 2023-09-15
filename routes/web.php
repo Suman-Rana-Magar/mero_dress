@@ -63,6 +63,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
 
+    Route::get('/users/edit/password',[UserController::class,'changePassword'])->name('users.changePassword');
+
+    Route::post('/users/{id}/changePassword',[UserController::class,'updatePassword'])->name('users.updatePassword');
+
     Route::post('/users/{id}', [UserController::class, 'update'])->name('users.update');
 
     Route::get('/users/cancel/editing', [UserController::class, 'cancel'])->name('users.cancel');
@@ -103,6 +107,10 @@ Route::middleware(['isAdmin'])->group(function () {
     Route::post('/admin/{id}', [AdminController::class, 'update'])->name('admin.update');
 
     Route::get('/admin/cancel/editing', [AdminController::class, 'cancel'])->name('admin.cancel');
+
+    Route::get('/users/edit/password',[AdminController::class,'changePassword'])->name('admin.changePassword');
+
+    Route::post('/users/{id}/changePassword',[AdminController::class,'updatePassword'])->name('admin.updatePassword');
 
     #products
 

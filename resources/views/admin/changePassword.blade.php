@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="{{ asset('images/llooggoo.png') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User | Info</title>
+    <title>User | Change Password</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <style>
@@ -48,13 +48,13 @@
         .user-email {
             color: #007bff;
         }
-        #input-field
-        {
+
+        #input-field {
             width: 95%;
             margin: auto;
         }
-        #button
-        {
+
+        .submit {
             text-align: center;
             margin-bottom: 10px;
         }
@@ -63,12 +63,12 @@
 
 <body>
     <div style="width: 50%; border-style: groove; margin: 20px 25%; border-radius: 25px;">
-        <form method="post" action="{{route('admin.update',Auth::user()->id)}}" enctype="multipart/form-data">
+        <form method="post" action="{{route('admin.updatePassword',Auth::user()->id)}}" enctype="multipart/form-data">
             @csrf
             <div style="margin-top: 10px;" class="mb-3" id="input-field">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" name="name" value="{{ old('name',$user->name) }}">
-                @error('name')
+                <label for="oldPassword" class="form-label">Old Password</label>
+                <input type="password" class="form-control @error('oldPassword') is-invalid @enderror" id="oldPassword" name="oldPassword" value="{{ old('oldPassword') }}">
+                @error('oldPassword')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -76,9 +76,9 @@
             </div>
 
             <div class="mb-3" id="input-field">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email',$user->email) }}">
-                @error('email')
+                <label for="newPassword" class="form-label">New Password</label>
+                <input type="password" class="form-control @error('newPassword') is-invalid @enderror" id="newPassword" name="newPassword" value="{{ old('newPassword') }}">
+                @error('newPassword')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -86,25 +86,22 @@
             </div>
 
             <div class="mb-3" id="input-field">
-                <label for="profile" class="form-label">Profile</label>
-                <input type="file" class="form-control @error('profile') is-invalid @enderror" id="profile" aria-describedby="emailHelp" name="profile" value="{{ old('profile',$user->profile) }}">
-                @error('profile')
+                <label for="reNewPassword" class="form-label">Re-Type New Password</label>
+                <input type="password" class="form-control @error('newPassword_confirmation') is-invalid @enderror" id="reNewPassword" name="newPassword_confirmation" value="{{ old('newPassword_confirmation') }}">
+                @error('reNewPassword')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
                 @enderror
             </div>
 
-            <div id="button">
-                <button type="submit" class="btn btn-primary">Save Profile</button>
+            <div class="submit">
+                <button type="submit" class="btn btn-primary">Change Password</button>
             </div>
         </form>
-        <div id="button">
-            <!-- <a href="{{URL::previous()}}"><button class="btn btn-secondary">Cancel</button></a> -->
-            <a href="{{route('admin.changePassword')}}"><button class="btn btn-info" title="Edit Password"><i class="fa-solid fa-key"></i></button></a>
+        <div class="submit">
             <a href="{{ route('admin.cancel') }}"><button class="btn btn-secondary">Cancel</button></a>
         </div>
-
     </div>
 </body>
 

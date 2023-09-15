@@ -6,8 +6,9 @@ use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class AdminController extends Controller
 {
     public function index()
@@ -95,7 +96,7 @@ class AdminController extends Controller
                 $user->profile = $url;
             }
             $user->update();
-            return redirect()->route('admin.profile');
+            return redirect()->route('admin.profile')->with('success','Profile Updated Successfully !');
         }
         
         else
@@ -119,8 +120,28 @@ class AdminController extends Controller
                 $user->profile = $url;
             }
             $user->update();
-            return redirect()->route('admin.profile');
+            return redirect()->route('admin.profile')->with('success','Profile Updated Successfully !');
         }
+    }
+
+    public function changePassword()
+    {
+        return view('admin.changePassword');
+    }
+
+    public function updatePassword(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'oldPassword' => 'required',
+            'newPassword' => 'required|confirmed|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
+        ]);
+        $user = User::where('id', $id)->first();
+        if(!Hash::check($validated['oldPassword'], Auth::user()->password)){
+            return back()->withErrors(["oldPassword" => "Old Password Doesn't match!"]);
+        }
+        $user->password = Hash::make($validated['newPassword']);
+        $user->update();
+        return redirect()->route('admin.profile')->with("success", "Password changed successfully!");
     }
 
     public function cancel()

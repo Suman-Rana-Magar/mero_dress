@@ -34,19 +34,18 @@ class UserController extends Controller
         $user->profile = $validated['image'];
         $user->password = Hash::make($validated['password']);
 
-        if($request->hasFile('image'))
-        {
+        if ($request->hasFile('image')) {
             $file = $request->file('image');
             $path = "customers";
             // $fileName = time().$file->getClientOriginalName();
             $file->store($path);
 
-            $url = $path.'/'.$file->hashName();
+            $url = $path . '/' . $file->hashName();
             $user->profile = $url;
         }
         $user->save();
         //return redirect("/products")       
-        return redirect()->route('users.create')->with('success','User Registered Successfully');
+        return redirect()->route('users.create')->with('success', 'User Registered Successfully');
     }
 
     public function check(Request $request)
@@ -55,17 +54,13 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-        if(Auth::attempt($check))
-        {
+        if (Auth::attempt($check)) {
             // session(['user_id' => Auth::user()->id]);
-            if(Auth::user()->role == 'admin')
-            {
+            if (Auth::user()->role == 'admin') {
                 return redirect()->route('admin.index');
             }
             return redirect()->route('products.index');
-        }
-        else
-        {
+        } else {
             return back()->withErrors([
                 'email' => 'Incorrect Email or Password !',
             ]);
@@ -74,9 +69,9 @@ class UserController extends Controller
 
     public function show()
     {
-        $user = User::where('email',Auth::user()->email)->first();
+        $user = User::where('email', Auth::user()->email)->first();
         $id = $user->id;
-        return view('users.show',compact('id'));
+        return view('users.show', compact('id'));
     }
 
     public function logout()
@@ -89,38 +84,34 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('users.edit',compact('user'));
+        return view('users.edit', compact('user'));
     }
 
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-        if($user->email == $request->email)
-        {
+        if ($user->email == $request->email) {
             $validated = $request->validate([
                 'name' => 'required',
-                'email' => 'required|email|unique:users,email,'.$id,
+                'email' => 'required|email|unique:users,email,' . $id,
                 'profile' => 'required|mimes:jpg,jpeg,png,gif',
             ]);
             $user->name = $validated['name'];
             $user->email = $validated['email'];
             $user->profile = $validated['profile'];
-    
+
             if ($request->hasFile('profile')) {
                 $file = $request->file('profile');
                 $path = "users";
                 // $fileName = time() . '_' . $file->getClientOriginalName();
                 $file->store($path);
                 $url = $path . '/' . $file->hashName();
-    
+
                 $user->profile = $url;
             }
             $user->update();
-            return redirect()->route('users.show');
-        }
-        
-        else
-        {
+            return redirect()->route('users.show')->with('success','Profile Updated Successfully !');
+        } else {
             $validated = $request->validate([
                 'name' => 'required',
                 'email' => 'required|email|unique:users',
@@ -129,21 +120,40 @@ class UserController extends Controller
             $user->name = $validated['name'];
             $user->email = $validated['email'];
             $user->profile = $validated['profile'];
-    
+
             if ($request->hasFile('profile')) {
                 $file = $request->file('profile');
                 $path = "users";
                 // $fileName = time() . '_' . $file->getClientOriginalName();
                 $file->store($path);
                 $url = $path . '/' . $file->hashName();
-    
+
                 $user->profile = $url;
             }
             $user->update();
-            return redirect()->route('users.show');
+            return redirect()->route('users.show')->with('success','Profile Updated Successfully !');
         }
     }
 
+    public function changePassword()
+    {
+        return view('users.changePassword');
+    }
+
+    public function updatePassword(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'oldPassword' => 'required',
+            'newPassword' => 'required|confirmed|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
+        ]);
+        $user = User::where('id', $id)->first();
+        if(!Hash::check($validated['oldPassword'], Auth::user()->password)){
+            return back()->withErrors(["oldPassword" => "Old Password Doesn't match!"]);
+        }
+        $user->password = Hash::make($validated['newPassword']);
+        $user->update();
+        return redirect()->route('users.show')->with("success", "Password changed successfully!");
+    }
     public function cancel()
     {
         return redirect()->route('users.show');

@@ -48,6 +48,11 @@
 @section('body')
 
 <div class="main">
+    @if (session('success'))
+    <div class="alert alert-success" style="width: 400px; margin: auto; margin-bottom: 10px;">
+        {{ session('success') }}
+    </div>
+    @endif
     <div class="profile-container">
         <img class="profile-picture" src='{{asset("storage/" . Auth::user()->profile)}}' alt="User Profile Picture">
         <div class="user-details">
