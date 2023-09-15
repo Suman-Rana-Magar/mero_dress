@@ -64,7 +64,7 @@ class ProductController extends Controller
         $stock->status = 'Bought';
         $stock->save();
 
-        return redirect()->route('products.create')->with('success', 'Product Added Successfully');
+        return redirect()->route('products.create')->with('success', 'Product Created Successfully');
     }
 
     public function show($id)

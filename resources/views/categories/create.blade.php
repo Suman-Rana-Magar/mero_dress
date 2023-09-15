@@ -26,6 +26,11 @@
 
 @section('body')
 <div style="margin-top: 10px; border-style: groove; border-radius: 20px;">
+@if (session('success'))
+<div class="alert alert-success" style="width: 400px; margin: auto;">
+    {{ session('success') }}
+</div>
+@endif
     <form action="{{route('categories.store')}}" method="post">
         @csrf
 

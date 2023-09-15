@@ -37,7 +37,7 @@ class CartController extends Controller
             $cart->total_price = ($product->selling_price * $request->quantity);
     
             $cart->save();
-            return redirect()->route('products.index');
+            return back()->with('success','Product Successfully Added To Your Cart !');
         }
         else
         {
@@ -51,7 +51,7 @@ class CartController extends Controller
         $cart = Cart::where('product_id',"$id")->first();
         if ($cart) {
             $cart->delete();
-            return redirect()->route('carts.index');
+            return back()->with('success','Product Successfully Removed From Cart !');
         } else {
             return redirect()->route('carts.index');
         }

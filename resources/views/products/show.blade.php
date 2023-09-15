@@ -8,12 +8,12 @@
 
 @endsection
 @section('body')
-@if( Session::has('success'))
-{{ Session::get( 'success' ) }}
-@elseif( Session::has( 'warning' ))
-{{ Session::get( 'warning' ) }}
-@endif
 <div class='container mt-5'>
+    @if (session('success'))
+    <div class="alert alert-success" style="width: 400px; margin: auto;">
+        {{ session('success') }}
+    </div>
+    @endif
     <div class='card'>
         <a href='{{route("products.index")}}' style='margin-left: 20px; color: black; '><i class="fa-solid fa-left-long"></i></a>
         <div class='row'>

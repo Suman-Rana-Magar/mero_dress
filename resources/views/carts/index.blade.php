@@ -62,6 +62,12 @@
     </tbody>
 </table>
 
+@if (session('success'))
+<div class="alert alert-success" style="width: 400px; margin: auto;">
+    {{ session('success') }}
+</div>
+@endif
+
 @else
 
 <h2 style="text-align: center;">Your Cart Is Empty !</h2>
