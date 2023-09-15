@@ -12,6 +12,13 @@
             text-align: center;
         }
 
+        .supermain
+        {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .main {
             margin: auto;
             border-style: groove;
@@ -33,40 +40,42 @@
 </head>
 
 <body>
-    <div id="main" class="main">
-        <div class="pagetitle">
-            <h1>User Login</h1>
+    <div class="supermain">
+        <div id="main" class="main">
+            <div class="pagetitle">
+                <h1>User Login</h1>
+            </div>
+            <form method="post" action="{{route('users.check')}}" enctype="multipart/form-data">
+                @csrf
+
+                <div class="mb-3" id="input-field">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" aria-describedby="emailHelp" name="email" value="{{old('email')}}">
+                    @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="mb-3" id="input-field">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" aria-describedby="emailHelp" name="password" value="{{old('password')}}">
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="submit">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <h6 style="margin-top: 10px;">Don't Have An Account? <a href="{{route('users.create')}}">Register</a></h6>
+                </div>
+
+
+            </form>
         </div>
-        <form method="post" action="{{route('users.check')}}" enctype="multipart/form-data">
-            @csrf
-
-            <div class="mb-3" id="input-field">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" aria-describedby="emailHelp" name="email" value="{{old('email')}}">
-                @error('email')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
- 
-            <div class="mb-3" id="input-field">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" aria-describedby="emailHelp" name="password" value="{{old('password')}}">
-                @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-
-            <div class="submit">
-                <button type="submit" class="btn btn-primary">Login</button>
-                <h6 style="margin-top: 10px;">Don't Have An Account? <a href="{{route('users.create')}}">Register</a></h6>
-            </div>
-            
-
-        </form>
     </div>
 </body>
 

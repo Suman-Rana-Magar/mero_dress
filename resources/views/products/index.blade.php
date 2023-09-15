@@ -13,6 +13,30 @@
 {{ Session::get( 'warning' ) }}
 @endif
 
+<style>
+    .image-container
+    {
+        width: auto;
+        overflow: hidden;
+        margin-top: 6px; 
+        margin-left: auto;
+        margin-right: auto;
+        height: 13rem; 
+    }
+    .img
+    {
+        max-width: 220px; 
+        width: auto; 
+        height: 200px;
+        transition: transform .2s;
+    }
+
+    .img:hover {
+        transform: scale(1.5);
+        width: auto;
+    }
+</style>
+
 @section('body')
 
 @foreach($products as $product)
@@ -20,11 +44,11 @@
     <div style="margin-left: 40px; display: inline-block;">
         <div style="margin-top: 20px;">
             <div class='card text-center' style='width:250px; height: 400px;'>
-                <div style=' margin-top: 6px; margin-bottom: 0; height: 13rem; width: auto;'>
-                    <img style='max-width: 230px; width: auto; height: 200px;' class='card-img-top imf' src='{{asset("storage/" . $product->image)}}' alt='{{$product->title}}'>
+                <div class="image-container">
+                    <img class='img' src='{{asset("storage/" . $product->image)}}' alt='{{$product->title}}'>
                 </div>
                 <div class='card-body' style='height: 200px; width: auto; '>
-                    <h5 style='margin-top: 0px; margin-bottom: 3px;'>{{$product->title}}</h5>
+                    <h5 style='margin-top: 0px; margin-bottom: 3px;'>{{Illuminate\Support\Str::limit($product->title, 22)}}</h5>
                     <div style='margin-top: 0; height:50px; width: auto; '>
                         <p style='margin-top: 0; margin-bottom: 3px;'>{{Illuminate\Support\Str::limit($product->description, 50)}}</p>
                     </div>

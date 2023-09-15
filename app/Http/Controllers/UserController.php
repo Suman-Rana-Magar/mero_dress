@@ -24,7 +24,7 @@ class UserController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required',
-            'email' => 'required|unique:users',
+            'email' => 'required|email|unique:users',
             'image' => 'required|file|mimes:jpg,png,jpeg,gif',
             'password' => 'required|confirmed|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
         ]);
@@ -45,7 +45,7 @@ class UserController extends Controller
         }
         $user->save();
         //return redirect("/products")       
-        return redirect()->route('users.create')->with('success', 'User Registered Successfully');
+        return redirect()->route('users.create')->with('success', 'User Registered Successfully ! Try Logging In !');
     }
 
     public function check(Request $request)

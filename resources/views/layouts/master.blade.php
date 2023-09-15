@@ -35,15 +35,6 @@
         background-color: aqua;
     }
 
-    img:hover {
-        opacity: 75%;
-    }
-
-    .imf {
-        max-width: 250px;
-        max-height: 250px;
-    }
-
     .col-sm-3 {
         width: 280px;
     }
@@ -158,8 +149,8 @@
                 <input class="form-control mr-sm-2" name="search" type="search" placeholder="Name of Product" aria-label="Search" value="{{ Request::get('search') }}">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 @if(Auth::user())
-                <a style="height: 40px; width: 40px; margin-left: 10px; border-radius: 19.5px;" href="{{route('users.show')}}">
-                    <img style="height: 40px; width: 40px; border-radius: 19.5px;" src='{{asset("storage/" . Auth::user()->profile)}}' alt="Profile" title="Profile">
+                <a href="{{route('users.show')}}">
+                    <img style="height: 40px; width: 40px; margin-left: 10px; border-radius: 19.5px;" src='{{asset("storage/" . Auth::user()->profile)}}' alt="Profile" title="Profile">
                 </a>
                 @else
                 <button style="border-radius: 50%; padding: 10px 3px; margin-left: 10px; "><a style="text-decoration: none; color: black;" href="{{route('users.index')}}">LogIn</a></button>

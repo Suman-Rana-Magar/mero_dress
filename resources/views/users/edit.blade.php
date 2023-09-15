@@ -100,8 +100,7 @@
             </div>
         </form>
         <div class="submit">
-            <!-- <a href="{{url()->previous()}}"><button class="btn btn-secondary">Cancel</button></a> -->
-            <a href="{{route('users.changePassword')}}"><button class="btn btn-info" title="Edit Password"><i class="fa-solid fa-key"></i></button></a>
+            <a href="{{ route('users.changePassword') }}"><button class="btn btn-info" title="Edit Password"><i class="fa-solid fa-key"></i></button></a>
             <a href="{{ route('users.cancel') }}"><button class="btn btn-secondary">Cancel</button></a>
         </div>
     </div>
