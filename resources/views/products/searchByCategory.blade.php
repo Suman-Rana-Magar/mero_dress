@@ -36,6 +36,11 @@
         width: auto;
     }
 </style>
+@section('category')
+<a id="title" href="#" style="margin-top: -5px; padding: 0; border-bottom-style: groove;">
+{{$category}}
+</a>
+@endsection
 
 @section('body')
 

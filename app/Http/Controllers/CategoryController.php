@@ -7,6 +7,11 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
+    // public function index()
+    // {
+    //     $categories = Category::get();
+    //     return view('layouts.master',compact('categories'));
+    // }
     public function create()
     {
         return view('categories.create');
