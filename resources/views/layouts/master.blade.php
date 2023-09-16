@@ -203,7 +203,7 @@
                             $selectedCategory = session('selectedCategory', 'Category');
                             @endphp
                             <a id="title" href="#" style="padding-top: 8px; transition: .3s;">
-                            @yield('category','Category')
+                            Category
                             </a>
                             <ul style="background: linear-gradient(#c04848, #480048);">
                                 @foreach($categories as $category)
