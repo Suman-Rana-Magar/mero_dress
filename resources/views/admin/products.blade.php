@@ -3,7 +3,14 @@
 @section('title','Admin | Products')
 
 @section('head','Products')
-
+<style>
+    #paginate {
+        margin-top: 20px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+    }
+</style>
 @section('body')
 <table class="table table-striped-columns">
     <thead>
@@ -52,5 +59,7 @@
         </tr>
     </tbody>
 </table>
-
+<div id="paginate">
+    {{ $products->links() }}
+</div>
 @endsection

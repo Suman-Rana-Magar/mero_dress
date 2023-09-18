@@ -22,6 +22,13 @@
         transform: scale(1.5);
         width: auto;
     }
+    #paginate
+    {
+        margin-top: 20px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+    }
 </style>
 @section('body')
 
@@ -54,5 +61,7 @@
     <h2 style="text-align: center;">No Such Product Found !</h2>
 </div>
 @endif
-
+<div id="paginate">
+{{ $searchedProducts->withQueryString()->links() }}
+</div>
 @endsection

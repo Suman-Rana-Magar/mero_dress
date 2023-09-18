@@ -10,7 +10,8 @@ class StockController extends Controller
     public function index()
     {
         
-        $stocks = Stock::join('products', 'products.id', '=', 'stocks.product_id')->where('status', 'Bought')->get(['products.*', 'stocks.*', 'products.id as productId', 'stocks.id as stockId']);
+        $stocks = Stock::join('products', 'products.id', '=', 'stocks.product_id')->where('status', 'Bought')->select(['products.*', 'stocks.*', 'products.id as productId', 'stocks.id as stockId'])->paginate(10);
+        // $stocks->paginate(10);
         return view('stocks.index', compact('stocks'));
     }
 

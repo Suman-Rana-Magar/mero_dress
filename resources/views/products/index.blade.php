@@ -35,6 +35,14 @@
         transform: scale(1.5);
         width: auto;
     }
+
+    #paginate
+    {
+        margin-top: 20px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+    }
 </style>
 
 @section('body')
@@ -63,5 +71,7 @@
     </div>
 
 @endforeach
-
+<div id="paginate">
+{{ $products->links() }}
+</div>
 @endsection

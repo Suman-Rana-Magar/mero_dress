@@ -18,7 +18,8 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::get()->shuffle();
+        $products = Product::paginate(10);
+        // $products = Product::get()->shuffle();
         return view('products.index', compact('products'));
     }
 
@@ -83,6 +84,7 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
+
         $validated = $request->validate([
             'title' => 'required',
             'quantity' => 'required',
@@ -130,13 +132,13 @@ class ProductController extends Controller
     public function search(Request $request)
     {
         $search = $request->search;
-        $searchedProducts = Product::where('keywords','LIKE',"%$search%")->orWhere('title','LIKE',"%$search%")->get()->shuffle();
+        $searchedProducts = Product::where('keywords','LIKE',"%$search%")->orWhere('title','LIKE',"%$search%")->paginate(10);
         return view('products.search',compact('searchedProducts'));
     }
 
     public function searchByCategory($id)
     {
-        $products = Product::where('category',$id)->get();
+        $products = Product::where('category',$id)->paginate(10);
         $get = Category::where('id',$id)->first();
         $category = \Illuminate\Support\Str::ucfirst($get->name);
         return view('products.searchByCategory',compact('products','category'));

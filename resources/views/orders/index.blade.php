@@ -3,7 +3,15 @@
 @section('title','Admin | Orders')
 
 @section('head','Orders')
-
+<style>
+     #paginate
+    {
+        margin-top: 20px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+    }
+</style>
 @section('body')
 <table class="table table-striped-columns">
     <thead>
@@ -31,4 +39,7 @@
         @endforeach
     </tbody>
 </table>
+<div id="paginate">
+{{ $orders->links() }}
+</div>
 @endsection

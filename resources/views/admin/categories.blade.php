@@ -3,7 +3,15 @@
 @section('title','Admin | Categories')
 
 @section('head','Categories')
-
+<style>
+     #paginate
+    {
+        margin-top: 20px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+    }
+</style>
 @section('body')
 
 <table class="table table-striped-columns">
@@ -32,5 +40,7 @@
         </tr>
     </tbody>
 </table>
-
+<div id="paginate">
+{{ $categories->links() }}
+</div>
 @endsection

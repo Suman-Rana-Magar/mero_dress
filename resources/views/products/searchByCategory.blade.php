@@ -34,6 +34,13 @@
         transform: scale(1.5);
         width: auto;
     }
+    #paginate
+    {
+        margin-top: 20px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+    }
 </style>
 
 @section('body')
@@ -69,4 +76,7 @@
     <p style="font-size: 25px; color: white;">Sorry, The product with this category is currently unavailable !</p>
 </dvi>
 @endif
+<div id="paginate">
+{{ $products->links() }}
+</div>
 @endsection

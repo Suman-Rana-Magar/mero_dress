@@ -84,10 +84,6 @@ Route::middleware(['auth'])->group(function () {
 //only admin accessible |--------------------------------------------------------------------------------------------------------
 
 Route::middleware(['isAdmin'])->group(function () {
-
-    #users
-
-
     //admin
 
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');

@@ -3,7 +3,15 @@
 @section('title','Admin | Stocks')
 
 @section('head','Stocks')
-
+<style>
+     #paginate
+    {
+        margin-top: 20px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+    }
+</style>
 @section('body')
 
 <table class="table table-striped-columns">
@@ -30,5 +38,7 @@
         @endforeach
     </tbody>
 </table>
-
+<div id="paginate">
+{{ $stocks->links() }}
+</div>
 @endsection

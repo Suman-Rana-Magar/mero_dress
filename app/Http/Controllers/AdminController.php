@@ -21,19 +21,19 @@ class AdminController extends Controller
 
     public function products()
     {
-        $products = Product::get();
+        $products = Product::paginate(10);
         return view('admin.products', compact('products'));
     }
 
     public function customers()
     {
-        $customers = User::get();
+        $customers = User::paginate(10);
         return view('admin.customers',compact('customers'));
     }
 
     public function categories()
     {
-        $categories = Category::get();
+        $categories = Category::paginate(10);
         return view('admin.categories',compact('categories'));
     }
 
