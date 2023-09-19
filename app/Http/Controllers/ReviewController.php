@@ -34,4 +34,21 @@ class ReviewController extends Controller
     {
         return redirect()->route('orders.show',Auth::user()->id);
     }
+
+    public function update($id)
+    {
+        $review = Review::findOrFail($id);
+        $review->approved = '1';
+        $review->update();
+
+        return redirect()->route('admin.review');
+    }
+
+    public function destroy($id)
+    {
+        $review = Review::findOrFail($id);
+        $review->delete();
+
+        return redirect()->route('admin.review');
+    }
 }

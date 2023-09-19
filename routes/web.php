@@ -177,3 +177,7 @@ Route::get('/reviews/create/{p_id}',[ReviewController::class,'create'])->name('r
 Route::get('/reviews/cancel-reviewing/',[ReviewController::class,'cancel'])->name('reviews.cancel');
 
 Route::post('/reviews/{p_id}',[ReviewController::class,'store'])->name('reviews.store');
+
+Route::get('/reviews/allow/reviews/{id}',[ReviewController::class,'update'])->name('reviews.update');
+
+Route::get('/reviews/deny/{id}/reviews',[ReviewController::class,'destroy'])->name('reviews.destroy');

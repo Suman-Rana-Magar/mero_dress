@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Review;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -151,6 +152,7 @@ class AdminController extends Controller
 
     public function review()
     {
-        return view('admin.reviews');
+        $reviews = Review::where('approved',0)->get();
+        return view('admin.reviews',compact('reviews'));
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Review;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 
@@ -71,9 +72,19 @@ class ProductController extends Controller
 
     public function show($id)
     {
+        $reviews = Review::where('product_id',$id)->where('approved',1)->get();
+        $reviewsCount = $reviews->count();
+        if($reviewsCount != 0)
+        {
+            $totalReviews = $reviews->sum('rating')/$reviewsCount;
+        }
+        else
+        {
+            $totalReviews = 0;
+        }
+        // dd($totalReviews);
         $product = Product::findOrFail($id);
-
-        return view('products.show', compact('product'));
+        return view('products.show', compact('product','reviews','totalReviews','reviewsCount'));
     }
 
     public function edit($id)
