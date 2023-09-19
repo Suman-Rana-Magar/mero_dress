@@ -45,7 +45,7 @@
             <td>{{ $stock->per_price }}</td>
             <td>{{ $stock->total_price }}</td>
             <td>{{ $stock->status }}</td>
-            <td>{{ $stock->created_at }}</td>
+            <td>{{ $stock->created_date }}</td>
         </tr>
         @endforeach
         <tr>

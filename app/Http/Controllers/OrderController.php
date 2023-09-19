@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Review;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,12 +64,26 @@ class OrderController extends Controller
     public function show($id)
     {
         //Here in leftJoin ('tableToJoinName','tableToJoinName.PK','=','tableWhereJoiningName.FK of tableToJoinName');
-        $myorders = Order::join('products','products.id','=','orders.product_id')->where('customer_id',$id)->get();
+        $myorders = Order::join('products','products.id','=','orders.product_id')->where('customer_id',$id)->get(['products.*','orders.*','orders.created_at as ordered_date','products.id as productId']);
         return view('orders.show',compact('myorders'));
     }
 
     public function cancel()
     {
         return redirect()->route('carts.index');
+    }
+
+    public function detail($id)
+    {
+        $reviews = Review::where('customer_id','=',Auth::user()->id)->where('product_id','=',$id)->get();
+        // dd($reviews);
+        $order = Order::join('products','products.id','=','orders.product_id')
+        ->where('products.id','=',$id)
+        ->where('orders.customer_id','=',Auth::user()->id)
+        ->select(['products.*','orders.*','orders.created_at as ordered_date','products.id as productId','orders.id as orderId'])->first();
+        // dd($order);
+        $reviewCount = $reviews->count();
+        // dd($reviewCount);
+        return view('orders.detail',compact('order','reviews','reviewCount'));
     }
 }

@@ -31,7 +31,7 @@ class StockController extends Controller
         $totalBoughtPrice = $GetBought->sum('total_price');
         $balance = $totalSoldPrice - $totalBoughtPrice;
 
-        $stocks = Stock::leftJoin('products', 'products.id', '=', 'stocks.product_id')->where('product_id', $id)->get();
+        $stocks = Stock::leftJoin('products', 'products.id', '=', 'stocks.product_id')->where('product_id', $id)->get(['products.*','stocks.*','stocks.created_at as created_date']);
         return view('stocks.show', compact('stocks', 'id', 'availableQuantity', 'balance'));
     }
 }

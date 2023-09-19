@@ -36,7 +36,7 @@
         <tr>
             <td>{{ $cart->product_id }}</td>
             <td>{{ $cart->product }}</td>
-            <td><img style="height: 50px; width: 50px;" src='{{asset("storage/" . $cart->image)}}' alt=''></td>
+            <td><img style="height: 50px; width: auto; max-width: 50px;" src='{{asset("storage/" . $cart->image)}}' alt=''></td>
             <td>{{ $cart->product_quantity }}</td>
             <td>{{ $cart->per_price }}</td>
             <td>{{ $cart->total_price }}</td>

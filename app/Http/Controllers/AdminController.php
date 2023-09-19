@@ -148,4 +148,9 @@ class AdminController extends Controller
     {
         return redirect()->route('admin.profile');
     }
+
+    public function review()
+    {
+        return view('admin.reviews');
+    }
 }

@@ -8,10 +8,12 @@ use App\Http\Controllers\ProductIndexController;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\UserController;
 use App\Models\Customer;
 use App\Models\Product;
+use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Providers\AuthServiceProvider;
@@ -46,7 +48,7 @@ Route::get('/products/{id}', [ProductController::class, 'show'])->name('products
 
 Route::get('/search', [ProductController::class, 'search'])->name('products.search');
 
-Route::get('/products/searchByCategory/{catId}',[ProductController::class,'searchByCategory'])->name('products.searchByCategory');
+Route::get('/products/searchByCategory/{catId}', [ProductController::class, 'searchByCategory'])->name('products.searchByCategory');
 
 //carts
 
@@ -65,9 +67,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
 
-    Route::get('/users/edit-password',[UserController::class,'changePassword'])->name('users.changePassword');
+    Route::get('/users/edit-password', [UserController::class, 'changePassword'])->name('users.changePassword');
 
-    Route::post('/users/{id}-changePassword',[UserController::class,'updatePassword'])->name('users.updatePassword');
+    Route::post('/users/{id}-changePassword', [UserController::class, 'updatePassword'])->name('users.updatePassword');
 
     Route::post('/users/{id}', [UserController::class, 'update'])->name('users.update');
 
@@ -78,6 +80,18 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/carts/{id}', [CartController::class, 'store'])->name('carts.store');
 
     Route::get('carts/{id}/destroy', [CartController::class, 'destroy'])->name('carts.destroy');
+
+    //orders
+
+    Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
+
+    Route::get('/orders/cancel/placing', [OrderController::class, 'cancel'])->name('orders.cancel');
+
+    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+
+    Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
 });
 
 
@@ -106,9 +120,9 @@ Route::middleware(['isAdmin'])->group(function () {
 
     Route::get('/admin/cancel/editing', [AdminController::class, 'cancel'])->name('admin.cancel');
 
-    Route::get('/users/edit/password',[AdminController::class,'changePassword'])->name('admin.changePassword');
+    Route::get('/users/edit/password', [AdminController::class, 'changePassword'])->name('admin.changePassword');
 
-    Route::post('/users/{id}/changePassword',[AdminController::class,'updatePassword'])->name('admin.updatePassword');
+    Route::post('/users/{id}/changePassword', [AdminController::class, 'updatePassword'])->name('admin.updatePassword');
 
     #products
 
@@ -133,6 +147,12 @@ Route::middleware(['isAdmin'])->group(function () {
     Route::post('/categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
 
     Route::get('/categories/{id}/destroy', [CategoryController::class, 'destroy'])->name('categories.destroy');
+
+    //Stocks
+
+    Route::get('/stocks/index', [StockController::class, 'index'])->name('stocks.index');
+
+    Route::get('/stocks/{id}', [StockController::class, 'show'])->name('stocks.show');
 });
 
 
@@ -145,22 +165,15 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/register', [UserController::class, 'create'])->name('users.create');
 });
 
+Route::get('/admin/reviews/customer-review',[AdminController::class,'review'])->name('admin.review');
 
-//orders
-
-Route::get('/orders/create',[OrderController::class,'create'])->name('orders.create');
-
-Route::get('/orders/cancel/placing',[OrderController::class,'cancel'])->name('orders.cancel');
-
-Route::post('/orders',[OrderController::class,'store'])->name('orders.store');
-
-Route::get('/orders',[OrderController::class,'index'])->name('orders.index');
-
-Route::get('/orders/{id}',[OrderController::class,'show'])->name('orders.show');
+Route::get('/orders/detail/{id}',[OrderController::class,'detail'])->name('orders.detail');
 
 
-//Stocks
+//review
 
-Route::get('/stocks/index',[StockController::class,'index'])->name('stocks.index');
+Route::get('/reviews/create/{p_id}',[ReviewController::class,'create'])->name('reviews.create');
 
-Route::get('/stocks/{id}',[StockController::class,'show'])->name('stocks.show');
+Route::get('/reviews/cancel-reviewing/',[ReviewController::class,'cancel'])->name('reviews.cancel');
+
+Route::post('/reviews/{p_id}',[ReviewController::class,'store'])->name('reviews.store');

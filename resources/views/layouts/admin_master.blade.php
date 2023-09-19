@@ -133,6 +133,9 @@
                 <a href="{{route('stocks.index')}}"><i class="fa-solid fa-money-bill-trend-up"></i> Stocks</a>
             </li>
             <li>
+                <a href="{{route('admin.review')}}"><i class="fa-solid fa-comments"></i> Reviews</a>
+            </li>
+            <li>
                 <a href="{{route('admin.profile')}}"><i class="fa-solid fa-address-card"></i> Profile</a>
             </li>
             <!-- Add more navigation links here -->
