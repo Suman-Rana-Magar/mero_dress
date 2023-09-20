@@ -47,7 +47,7 @@
 
 @section('body')
 <div style="margin-left: 40px; height: 40px; width: 100%; margin-bottom: -20px;">
-    <p style="font-size: 20px; font-weight: bold; color: yellow;">Home</p>
+    <p style="font-size: 20px; font-weight: bold; color: yellow; cursor: default">Home</p>
 </div>
 @foreach($products as $product)
 

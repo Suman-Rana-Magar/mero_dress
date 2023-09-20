@@ -152,7 +152,7 @@ class ProductController extends Controller
     {
         $search = $request->search;
         $searchedProducts = Product::where('keywords','LIKE',"%$search%")->orWhere('title','LIKE',"%$search%")->paginate(10);
-        return view('products.search',compact('searchedProducts'));
+        return view('products.search',compact('searchedProducts','search'));
     }
 
     public function searchByCategory($id)

@@ -45,7 +45,7 @@
 
 @section('body')
 <div style="margin-left: 40px; height: 40px; width: 100%; margin-bottom: -20px;">
-    <p style="font-size: 20px; font-weight: bold; color: yellow;">Category>{{$category}}</p>
+    <p style="font-size: 20px; font-weight: bold; color: yellow; cursor: default;">Category>{{$category}}</p>
 </div>
 @if($products->isNotEmpty())
 @foreach($products as $product)

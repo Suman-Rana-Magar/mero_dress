@@ -31,7 +31,9 @@
     }
 </style>
 @section('body')
-
+<div style="margin-left: 40px; height: 40px; width: 100%; margin-bottom: -20px;">
+    <p style="font-size: 20px; font-weight: bold; color: yellow; cursor: default">Search>"{{ $search }}"</p>
+</div>
 @if($searchedProducts->isNotEmpty())
 
 @foreach($searchedProducts as $product)

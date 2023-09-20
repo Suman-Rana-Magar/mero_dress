@@ -39,7 +39,7 @@
             @csrf
 
             <div style="margin-top: 10px;" class="mb-3" id="input-field">
-                <label for="title" class="form-label">Title</label>
+                <label for="title" class="form-label">Name</label>
                 <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" aria-describedby="emailHelp" name="title" value="{{old('title')}}">
                 @error('title')
                 <span class="invalid-feedback" role="alert">
