@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Review;
 use App\Models\Stock;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -72,7 +74,12 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $reviews = Review::where('product_id',$id)->where('approved',1)->get();
+        $reviews = Review::with('user')
+        // dd($reviews->all());
+        ->where('product_id',$id)
+        ->where('approved',1)
+        ->get();
+        // dd($reviews->all());
         $reviewsCount = $reviews->count();
         if($reviewsCount != 0)
         {

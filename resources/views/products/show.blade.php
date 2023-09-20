@@ -82,7 +82,7 @@
 
     </div>
     @if($reviews->isNotEmpty())
-    <div class="card mt-2">
+    <div class="card mt-2" style="margin-bottom: 10px;">
         <div class="reviewTitle">
             <h4>Reviews and Ratings</h4>
         </div>
@@ -107,9 +107,13 @@
                 <h5 class="reviews">Reviews</h5>
                 <!-- foreach from here -->
                 @foreach($reviews as $review)
+                @php
+                $user = $review->user;
+                $userName = $user->name;
+                @endphp
                 <div class="allReviews">
                     <h6 style="font-size: 18px; margin-bottom: 0;">{{ $review->rating }}/10</h6>
-                    <p style="font-size: 12.5px; color: #404040; margin-bottom: 5px;">by {{ $review->customer_id }}</p>
+                    <p style="font-size: 12.5px; color: #404040; margin-bottom: 5px;">by {{ $userName }}</p>
                     <p style="border-bottom-style: groove; margin-right: 20px; padding-bottom: 5px;">{{ $review->comments }}</p>
                 </div>
                 @endforeach

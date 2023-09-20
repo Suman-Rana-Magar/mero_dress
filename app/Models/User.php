@@ -13,7 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    
+
     //Relationship Between User and Cart 
     public function cart(): HasMany
     {
@@ -56,4 +56,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+
+    public function review(): HasMany
+    {
+        return $this->hasMany(Review::class);
+    }
 }

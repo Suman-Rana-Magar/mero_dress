@@ -9,8 +9,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Review extends Model
 {
     use HasFactory;
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class,'customer_id');
+    }
+
     public function product(): BelongsTo
     {
-        return $this->belongsTo(Product::class);
-    }
+        return $this->belongsTo(Product::class,'product_id');
+    } 
 }
