@@ -262,7 +262,7 @@
                     <img style="height: 40px; width: 40px; margin-left: 10px; border-radius: 19.5px;" src='{{asset("storage/" . Auth::user()->profile)}}' alt="Profile" title="Profile">
                 </a>
                 @else
-                <button style="border-radius: 50%; padding: 10px 3px; margin-left: 10px; "><a style="text-decoration: none; color: black;" href="{{route('users.index')}}">LogIn</a></button>
+                <a title="Guest" style="text-decoration: none; color: black; border-color: black; border-style: solid; border-radius: 50%; padding: 7px; background-color: white; margin-left: 10px;" href="{{route('users.index')}}"><i class="fa-solid fa-user" style="font-size: 25px;"></i></a>
                 @endif
             </form>
         </div>
