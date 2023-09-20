@@ -23,6 +23,10 @@
         margin-left: -20px;
         padding: 5px 20px;
     }
+    .image
+    {
+        -webkit-user-drag: none;
+    }
 </style>
 
 @section('body')
@@ -85,17 +89,17 @@
         <div class="contents">
             <div class="totalRating">
                 <h4 style="margin-top: 5px;">{{ $totalReviews }}/<span style="color: #666666;">10</span></h4>
-                <div class="images">
+                <div class>
                     @if($totalReviews <= 2)
-                    <img src="{{ asset('storage/others/angry.png') }}" alt="Happy" height="150" width="auto">
+                    <img class="image" src="{{ asset('storage/others/angry.png') }}" alt="Happy" height="150" width="auto">
                     @elseif($totalReviews > 2 && $totalReviews <= 4)
-                    <img src="{{ asset('storage/others/slightly_angry.png') }}" alt="Happy" height="150" width="auto">
+                    <img class="image" src="{{ asset('storage/others/slightly_angry.png') }}" alt="Happy" height="150" width="auto">
                     @elseif($totalReviews > 4 && $totalReviews <= 6)
-                    <img src="{{ asset('storage/others/none.png') }}" alt="Happy" height="150" width="auto">
+                    <img class="image" src="{{ asset('storage/others/none.png') }}" alt="Happy" height="150" width="auto">
                     @elseif($totalReviews > 6 && $totalReviews <= 8)
-                    <img src="{{ asset('storage/others/slightly_happy.png') }}" alt="Happy" height="150" width="auto">
+                    <img class="image" src="{{ asset('storage/others/slightly_happy.png') }}" alt="Happy" height="150" width="auto">
                     @else
-                    <img src="{{ asset('storage/others/happy.png') }}" alt="Happy" height="150" width="auto">
+                    <img class="image" src="{{ asset('storage/others/happy.png') }}" alt="Happy" height="150" width="auto">
                     @endif
                     <!-- images here for user satisfaction -->
                 </div>
