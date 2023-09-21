@@ -134,7 +134,7 @@ Route::middleware(['isAdmin'])->group(function () {
 
     Route::post('/products/{id}', [ProductController::class, 'update'])->name('products.update');
 
-    Route::get('/products/{id}/destroy', [ProductController::class, 'destroy'])->name('products.destroy');
+    Route::get('/products/{id}/destroy-product', [ProductController::class, 'destroy'])->name('products.destroy');
 
     //categories
 

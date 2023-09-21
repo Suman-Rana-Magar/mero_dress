@@ -17,12 +17,16 @@
         .total b {
             color: lawngreen;
         }
+
+        body {
+            background: linear-gradient(to right, #c04848, #480048);
+        }
     </style>
 </head>
 
 <body>
-    <h1 style=" margin-bottom: 0; text-align: center; color: white; background-color: black; font-family: Courier, monospace;"><b>Order Placing</b></h1>
-    <table style="margin-top:0; text-align: center;" class="table table-dark table-striped">
+    <h1 style=" margin-bottom: 0; text-align: center; color: white; font-family: Courier, monospace;"><b>Order Placing</b></h1>
+    <table style="margin: auto; text-align: center; width: 95%; margin-bottom: 20px;" class="table table-striped">
         <thead>
             <th>Product</th>
             <th>Quantity</th>
@@ -36,7 +40,7 @@
             @endphp
             @foreach($products as $product)
             <tr>
-                <td><img style="height: 50px; width: 50px;" src='{{asset("storage/" . $product->image)}}' alt=''></td>
+                <td><img style="height: 50px; width: auto; max-width: 50px;" src='{{asset("storage/" . $product->image)}}' alt=''></td>
                 <td>{{ $product->product_quantity}}</td>
                 <td>{{ $product->per_price}}</td>
                 <td>{{ $product->total_price}}</td>
@@ -56,10 +60,10 @@
 
     </table>
     <center>
-        <form method="post" action="{{route('orders.store')}}" style="width: 60%; border-style: groove; border-radius: 20px;">
+        <form method="post" action="{{route('orders.store')}}" style="width: 60%; background-color: white; border-radius: 20px;">
             @csrf
 
-            <h2 class="text-center mt-4" style="font-family: Courier, monospace; color: black;">Please Enter your Address</h2><br>
+            <h2 class="text-center mt-4" style="padding-top: 20px; font-family: Courier, monospace; color: black;">Please Enter your Address</h2><br>
             <div class="input-group" style="width: 90%; height:auto;">
                 <label for="address" class="input-group-text"><i class="fa-solid fa-location-dot"></i></label>
                 <input id="address" type="text" name="address" class="form-control @error('address') is-invalid @enderror" placeholder="Format: पालिका-वार्ड नं.,टोल,जिल्ला            E.g.: Swyoyambhu-15,Bijeshwori,Kathmandu" value="{{old('address')}}">
@@ -67,7 +71,7 @@
                 <span style="text-align: left; margin-left: 35px;" class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
-                @enderror 
+                @enderror
             </div><br>
             <button type="submit" name="submit" class="btn btn-success">Place Order</button>
             <a href="{{route('orders.cancel')}}"><button type="button" class="btn btn-danger" style="margin: 10px 50px;">Cancel</button></a>

@@ -37,7 +37,7 @@
         @csrf
 
         <div style="margin-top: 10px;" class="mb-3" id="input-field">
-            <label for="title" class="form-label">Title</label>
+            <label for="title" class="form-label">Name</label>
             <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" aria-describedby="emailHelp" name="title" value="{{ $product->title }}">
             @error('title')
             <span class="invalid-feedback" role="alert">
@@ -77,7 +77,7 @@
         </div>
 
         <div class="mb-3" id="input-field">
-            <label for="category">Category</label>
+            <label for="category">Category<span style="color: red">*</span></label>
             <select id="category" name="category" class="form-control" name="category">
                 <option value="">Select Category</option>
                 @foreach($categories as $category)

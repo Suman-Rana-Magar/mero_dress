@@ -103,14 +103,13 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-
         $validated = $request->validate([
             'title' => 'required',
             'quantity' => 'required',
             'description' => 'required',
             'keywords' => 'required',
             'category' => 'required',
-            'image' => 'required|file|mimes:jpg,png,jpeg,gif,svg|max:1024',
+            'image' => 'required|file|',
             'cost_price' => 'required',
             'selling_price' => 'required',
         ]);
