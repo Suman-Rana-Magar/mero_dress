@@ -24,6 +24,9 @@ Route::resource('/products',ProductController::class);
 
 Route::resource('/users',UserController::class);
 
+Route::post('/login',[UserController::class,'login']);
+
+Route::post('/users/logout',[UserController::class,'logout']);
 
 // Route::put('/users/{id}',[UserController::class,'update']);
 

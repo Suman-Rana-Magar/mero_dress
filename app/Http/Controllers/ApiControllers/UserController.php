@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ApiControllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -173,5 +174,39 @@ class UserController extends Controller
         return response()->json([
             'success' => 'User with id ' . $id . ' deleted successfully',
         ], 202);
+    }
+
+    public function login(Request $request)
+    {
+        // dd($request->all());
+        $validated = $request->validate([
+
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+
+        if(!Auth::attempt($validated))
+        {
+            return response()->json([
+                'error' => 'Incorrect email or password ',
+            ]);
+        }
+        return response()->json([
+            'success' => 'You are logged in successfully !',
+        ]);
+    }
+
+    public function logout()
+    {
+        if(!Auth::user())
+        {
+            return response()->json([
+                'error' => 'Login first for logout',
+            ]);
+        }
+        return response()->json([
+            'success' => 'You have loggoud successfully !',
+        ]);
     }
 }
