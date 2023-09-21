@@ -114,7 +114,7 @@ class ProductController extends Controller
                 'image' => 'required',
                 'cost_price' => 'required',
                 'selling_price' => 'required',
-            ]);            
+            ]);
             $product->title = $validated['title'];
             $product->quantity = $validated['quantity'];
             $product->description = $validated['description'];
@@ -123,6 +123,16 @@ class ProductController extends Controller
             $product->image = $validated['image'];
             $product->cost_price = $validated['cost_price'];
             $product->selling_price = $validated['selling_price'];
+
+            // $product->title = $request->title;
+            // $product->quantity = $request->quantity;
+            // $product->description = $request->description;
+            // $product->keywords = $request->keywords;
+            // $product->category = $request->category;
+            // $product->image = $request->image;
+            // $product->cost_price = $request->cost_price;
+            // $product->selling_price = $request->selling_price;
+
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 $path = "products";
@@ -133,7 +143,7 @@ class ProductController extends Controller
                 $product->image = $url;
             }
             $product->update();
-
+            
             return response()->json([
                 'success' => 'Product with id ' . $id . ' updated successfully',
             ], 200);
