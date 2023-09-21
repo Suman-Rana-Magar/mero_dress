@@ -24,6 +24,7 @@ Route::resource('/products',ProductController::class);
 
 Route::resource('/users',UserController::class);
 
+
 // Route::put('/users/{id}',[UserController::class,'update']);
 
 // Route::get('/products',[ProductController::class,'index']);
