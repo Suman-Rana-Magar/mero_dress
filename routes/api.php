@@ -28,6 +28,7 @@ Route::post('/login',[UserController::class,'login']);
 
 Route::post('/users/logout',[UserController::class,'logout']);
 
+Route::get('/users/{id}/reset-password',[UserController::class,'resetPassword']);
 // Route::put('/users/{id}',[UserController::class,'update']);
 
 // Route::get('/products',[ProductController::class,'index']);

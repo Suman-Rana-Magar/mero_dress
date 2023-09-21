@@ -209,4 +209,25 @@ class UserController extends Controller
             'success' => 'You have loggoud successfully !',
         ]);
     }
+
+    public function resetPassword(Request $request,$id)
+    {
+        $user = User::find($id);
+        if(empty($user))
+        {
+            return response()->json([
+                'error' => 'No user found with id '.$id,
+            ],404);
+        }
+        $validate = $request->validate([
+            'email' => 'required|email',
+        ]);
+        if(!$user->email == $validate['email'])
+        {
+            return response()->json([
+                'error' => 'No such email found !',
+            ],404);
+        }
+        
+    }
 }
