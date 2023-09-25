@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VerificationController;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Review;
@@ -182,4 +183,8 @@ Route::get('/reviews/allow/reviews/{id}',[ReviewController::class,'update'])->na
 
 Route::get('/reviews/deny/{id}/reviews',[ReviewController::class,'destroy'])->name('reviews.destroy');
 
-Route::get('/');
+Route::get('/verify-email',[VerificationController::class,'show'])->name('verification.notice');
+
+Route::get('/verity-email/{id}/{hash}',[VerificationController::class,'verify'])->name('verification.verify');
+
+Route::get('/verify-email/resend/{id}',[VerificationController::class,'resend'])->name('verification.resend');

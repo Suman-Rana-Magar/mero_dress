@@ -1,12 +1,18 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Contracts\View\View;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Auth\Events\Registered;
+
 
 class UserController extends Controller
 {
@@ -33,7 +39,7 @@ class UserController extends Controller
         $user->email = $validated['email'];
         $user->profile = $validated['image'];
         $user->password = Hash::make($validated['password']);
-
+        $user->email_verification_token = Str::random(64);
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $path = "customers";
@@ -44,13 +50,23 @@ class UserController extends Controller
             $user->profile = $url;
         }
         $user->save();
-        //return redirect("/products")       
-        return redirect()->route('users.create')->with('success', 'User Registered Successfully ! Please Check Your Email To Verify !');
-    }
 
-    public function verifyEmail()
-    {
-        // 
+        // event(new Registered($user));
+
+        $user_id = $user->id;
+        $email_verification_token = $user->email_verification_token;
+        // $url = route('verification.verify',[$user_id,$email_verification_token]);
+        Mail::send('verification.email', ['user_id' => $user_id, 'email_verification_token' => $email_verification_token], function ($message) use ($request) {
+            $message->to($request->email);
+            $message->subject('Email Verification');
+        });
+        //return redirect("/products")   
+        // View::make('verification.email',compact('user_id','email_verification_token'));
+        return view('verification.show',compact('user_id'));
+        // return (new MailMessage)
+        //     ->subject('Verify Email Address')
+        //     ->line('Click the button given below to verity your email address !')
+        //     ->action('Verity Email Address',$url);
     }
 
     public function check(Request $request)
@@ -115,7 +131,7 @@ class UserController extends Controller
                 $user->profile = $url;
             }
             $user->update();
-            return redirect()->route('users.show')->with('success','Profile Updated Successfully !');
+            return redirect()->route('users.show')->with('success', 'Profile Updated Successfully !');
         } else {
             $validated = $request->validate([
                 'name' => 'required',
@@ -136,10 +152,8 @@ class UserController extends Controller
                 $user->profile = $url;
             }
             $user->update();
-            return redirect()->route('users.show')->with('success','Profile Updated Successfully !');
+            return redirect()->route('users.show')->with('success', 'Profile Updated Successfully !');
         }
-
-        
     }
 
     public function changePassword()
@@ -154,7 +168,7 @@ class UserController extends Controller
             'newPassword' => 'required|confirmed|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
         ]);
         $user = User::where('id', $id)->first();
-        if(!Hash::check($validated['oldPassword'], Auth::user()->password)){
+        if (!Hash::check($validated['oldPassword'], Auth::user()->password)) {
             return back()->withErrors(["oldPassword" => "Old Password Doesn't match!"]);
         }
         $user->password = Hash::make($validated['newPassword']);
