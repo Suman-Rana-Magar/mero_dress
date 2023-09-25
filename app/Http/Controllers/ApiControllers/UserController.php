@@ -202,7 +202,7 @@ class UserController extends Controller
         if(!Auth::user())
         {
             return response()->json([
-                'error' => 'Login first for logout',
+                'error' => 'Login first in order to logout',
             ]);
         }
         return response()->json([
