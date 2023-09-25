@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Auth\Events\Registered;
@@ -62,7 +64,7 @@ class UserController extends Controller
         });
         //return redirect("/products")   
         // View::make('verification.email',compact('user_id','email_verification_token'));
-        return view('verification.show',compact('user_id'));
+        return view('verification.show', compact('user_id'));
         // return (new MailMessage)
         //     ->subject('Verify Email Address')
         //     ->line('Click the button given below to verity your email address !')
@@ -77,10 +79,16 @@ class UserController extends Controller
         ]);
         if (Auth::attempt($check)) {
             // session(['user_id' => Auth::user()->id]);
-            if (Auth::user()->role == 'admin') {
-                return redirect()->route('admin.index');
+            if (Auth::user()->email_verified == 1) {
+
+                if (Auth::user()->role == 'admin') {
+                    return redirect()->route('admin.index');
+                }
+                return redirect()->route('products.index');
             }
-            return redirect()->route('products.index');
+            return Redirect::back()->withErrors([
+                'email' => 'Registered but unverified email, verity and try again !',
+            ]);
         } else {
             return back()->withErrors([
                 'email' => 'Incorrect Email or Password !',
