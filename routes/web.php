@@ -181,3 +181,5 @@ Route::post('/reviews/{p_id}',[ReviewController::class,'store'])->name('reviews.
 Route::get('/reviews/allow/reviews/{id}',[ReviewController::class,'update'])->name('reviews.update');
 
 Route::get('/reviews/deny/{id}/reviews',[ReviewController::class,'destroy'])->name('reviews.destroy');
+
+Route::get('/');

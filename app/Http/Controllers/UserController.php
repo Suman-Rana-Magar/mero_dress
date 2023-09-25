@@ -45,7 +45,12 @@ class UserController extends Controller
         }
         $user->save();
         //return redirect("/products")       
-        return redirect()->route('users.create')->with('success', 'User Registered Successfully ! Try Logging In !');
+        return redirect()->route('users.create')->with('success', 'User Registered Successfully ! Please Check Your Email To Verify !');
+    }
+
+    public function verifyEmail()
+    {
+        // 
     }
 
     public function check(Request $request)
@@ -133,6 +138,8 @@ class UserController extends Controller
             $user->update();
             return redirect()->route('users.show')->with('success','Profile Updated Successfully !');
         }
+
+        
     }
 
     public function changePassword()
