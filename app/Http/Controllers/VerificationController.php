@@ -22,10 +22,10 @@ class VerificationController extends Controller
         $user = User::find($id);
         
         if (!$user) {
-            return redirect('/login')->with('error', 'Invalid verification link.');
+            return redirect('/register')->with('error', 'Invalid verification link.');
         }
         if ($user->email_verified == 1) {
-            return redirect('/login')->with('message', 'Email already verified.');
+            return redirect('/login')->with('success', 'Email already verified.');
         }
         // dd($user);
 
@@ -33,7 +33,7 @@ class VerificationController extends Controller
 
         if(!$email_verification_token == $token)
         {
-            return redirect('/login')->with('error','Unable to verify this email, please try again later !');
+            return redirect('/register')->with('error','Unable to verify this email, please try again later !');
         }
         // dd($email_verification_token);
 
@@ -41,7 +41,7 @@ class VerificationController extends Controller
         $user->email_verified_at = now();
         $user->update();
 
-        return redirect('/login')->with('message', 'Email verified successfully. You can now log in.');
+        return redirect('/login')->with('success', 'Email verified successfully. You can now log in.');
     }
 
     public function resend($id)
@@ -53,6 +53,6 @@ class VerificationController extends Controller
         // dd($user);
         $user->sendEmailVerificationNotification();
 
-        return back()->with('message', 'Verification email resent.');
+        return back()->with('success', 'Verification email resent.');
     }
 }

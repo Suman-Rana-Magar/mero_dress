@@ -12,13 +12,13 @@
             text-align: center;
         }
 
-        .supermain
-        {
+        .supermain {
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
         }
+
         .main {
             margin: auto;
             border-style: groove;
@@ -40,6 +40,15 @@
 </head>
 
 <body>
+    @if (session('success'))
+    <div class="alert alert-success" style="width: 50%; text-align: center; margin: auto; margin-top: 150px; margin-bottom: -210px;">
+        {{ session('success') }}
+    </div>
+    @elseif(session('error'))
+    <div class="alert alert-danger" style="width: 50%; text-align: center; margin: auto; margin-top: 150px; margin-bottom: -210px;">
+        {{ session('error') }}
+    </div>
+    @endif
     <div class="supermain">
         <div id="main" class="main">
             <div class="pagetitle">

@@ -41,8 +41,12 @@
 
 <body>
     @if (session('success'))
-    <div class="alert alert-success" style="width: 50%; text-align: center; margin: auto; margin-bottom: 10px;">
+    <div class="alert alert-success" style="width: 50%; text-align: center; margin: auto; margin-top: 50px; margin-bottom: -50px;">
         {{ session('success') }}
+    </div>
+    @elseif(session('error'))
+    <div class="alert alert-danger" style="width: 50%; text-align: center; margin: auto; margin-top: 50px; margin-bottom: -50px;">
+        {{ session('error') }}
     </div>
     @endif
     <div class="supermain">
