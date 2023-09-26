@@ -20,10 +20,12 @@
 <style>
     body {
         background: linear-gradient(to right, #c04848, #480048);
+        /* background-color: #ab2b2b; */
     }
 
     nav {
         background: linear-gradient(to bottom, #c04848, #480048);
+        /* background-color: lightblue; */
     }
 
     .nav-link {

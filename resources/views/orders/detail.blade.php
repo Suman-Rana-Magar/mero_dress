@@ -103,8 +103,11 @@
                 <th>Per Price(Rs.)</th>
                 <th>Total Price(Rs.)</th>
                 <th>Shipping Address</th>
-                <th>Ordered Date</th>
+                <th>Status</th>
+                @if($order->status == 'received')
+                <th>Received On</th>
                 <th>Review</th>
+                @endif
             </thead>
             <tbody>
                 <tr>
@@ -114,17 +117,25 @@
                     <td>{{ $order->per_price }}</td>
                     <td>{{ $order->total_price }}</td>
                     <td>{{ $order->shipping_address }}</td>
-                    <td>{{ $order->ordered_date }}</td>
+                    @if($order->status == 'pending')
+                    <td><button type="button" class="btn btn-primary" style="padding: 2px 7px;">{{ $order->status }}</button></td>
+                    @else
+                    <td><button type="button" class="btn btn-success" style="padding: 2px 7px;">{{ $order->status }}</button></td>
+                    @endif
+                    @if($order->status == 'received')
+                    <td>{{ $order->updated_at }}</td>
                     @if($reviewCount == 1)
                     <td><i class="fa-solid fa-ban" style="cursor: pointer; color: blue; font-size: 25px;" title="Max Number Of Review Reached !"></i></td>
                     @else
                     <td><a href="{{route('reviews.create',$order->productId)}}" style="font-size: 25px;" title="Write A Review"><i class="fa-solid fa-pen"></i></a></td>
+                    @endif
                     @endif
                 </tr>
             </tbody>
         </table>
     </div>
     <div class="myReviews">
+        @if($order->status == 'received')
         <h2>My Review</h2>
         @if($reviews->isNotEmpty())
         @foreach($reviews as $review)
@@ -145,6 +156,7 @@
         @endforeach
         @else
         <h4>You Haven't Reviewed This Product Yet !</h4>
+        @endif
         @endif
     </div>
 </body>

@@ -189,3 +189,5 @@ Route::get('/verify-email', [VerificationController::class, 'show'])->name('veri
 Route::get('/verity-email/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
 
 Route::get('/verify-email/resend/{id}', [VerificationController::class, 'resend'])->name('verification.resend');
+
+Route::get('/orders/deliver-order/{id}',[OrderController::class,'deliver'])->name('orders.deliver');

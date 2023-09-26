@@ -88,7 +88,6 @@
                 <th>Per Price(Rs.)</th>
                 <th>Total Price(Rs.)</th>
                 <th>Shipping Address</th>
-                <th>Ordered Date</th>
                 <th>Action</th>
             </thead>
             <tbody>
@@ -100,7 +99,6 @@
                     <td>{{ $order->per_price }}</td>
                     <td>{{ $order->total_price }}</td>
                     <td>{{ $order->shipping_address }}</td>
-                    <td>{{ $order->ordered_date }}</td>
                     <td><a href="{{route('orders.detail',$order->productId)}}" style="font-size: 25px;" title="Check Detail"><i class="fa-solid fa-circle-info"></i></a></td>
                     @php
                     $total_quantity += $order->product_quantity;
@@ -114,7 +112,6 @@
                     <th id="final">{{ $total_quantity }}</th>
                     <td></td>
                     <th id="final">{{ $total_price }}</th>
-                    <td></td>
                     <td></td>
                     <td></td>
                 </tr>

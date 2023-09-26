@@ -22,6 +22,8 @@
         <th>Per Price</th>
         <th>Total Price</th>
         <th>Shipping Address</th>
+        <th>Status</th>
+        <th>Deliver</th>
         <th>Ordered Date</th>
     </thead>
     <tbody>
@@ -34,6 +36,16 @@
             <td>{{ $order->per_price }}</td>
             <td>{{ $order->total_price }}</td>
             <td>{{ $order->shipping_address }}</td>
+            @if($order->status == 'pending')
+            <td><button type="button" class="btn btn-primary" style="padding: 2px 7px;">{{ $order->status }}</button></td>
+            @else
+            <td><button type="button" class="btn btn-success" style="padding: 2px 7px;">{{ $order->status }}</button></td>
+            @endif
+            @if($order->status == 'pending')
+            <td><a href="{{ route('orders.deliver',$order->id) }}"><i style="font-size: 20px;" class="fa-solid fa-circle-check"></i></a></td>
+            @else
+            <td>—</td>
+            @endif
             <td>{{ $order->created_at }}</td>
         </tr>
         @endforeach

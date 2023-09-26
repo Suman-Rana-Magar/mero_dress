@@ -107,4 +107,13 @@ class OrderController extends Controller
         // dd($reviewCount);
         return view('orders.detail', compact('order', 'reviews', 'reviewCount'));
     }
+
+    public function deliver($id)
+    {
+        $order = Order::where('id',$id)->first();
+        // $orders = Order::get();
+        $order->status = 'received';
+        $order->update();
+        return redirect()->route('orders.index');
+    }
 }
