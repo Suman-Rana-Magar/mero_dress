@@ -15,7 +15,28 @@ class OrderController extends Controller
     public function create()
     {
         $products = Cart::where('customer_id', Auth::user()->id)->get();
-        return view('orders.create', compact('products'));
+        // dd($products);
+        $unavailableProduct = [];
+        foreach ($products as $product) {
+            $productData = Product::findOrFail($product->product_id);
+            // $productlist[] = $productData->quantity;
+            if($productData->quantity < $product->product_quantity)
+            {
+                $unavailableProduct[] = $product->product_id;
+            }
+            // $availableQuantity[] = $productData->quantity;
+        }
+        // dd($unavailableProduct);
+        if (count($unavailableProduct)==0) {
+            return view('orders.create', compact('products'));
+        }
+        $unavailableProductList = implode(", ",$unavailableProduct);
+        $count = count($unavailableProduct);
+        if($count == 1)
+        {
+        return back()->with('error', 'Sorry, The available product with id ' . $unavailableProductList . ' is less than your order request. Please check available quantity and try again !');
+        }
+        return back()->with('error', 'Sorry, The available products with ids ' . $unavailableProductList . ' are less than your order request. Please check available quantity and try again !');
     }
 
     public function store(Request $request)
@@ -50,7 +71,7 @@ class OrderController extends Controller
             $stock->save();
         }
 
-        Cart::where('customer_id',Auth::user()->id)->delete();
+        Cart::where('customer_id', Auth::user()->id)->delete();
 
         return redirect()->route('products.index');
     }
@@ -58,14 +79,14 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::paginate(10);
-        return view('orders.index',compact('orders'));
+        return view('orders.index', compact('orders'));
     }
 
     public function show($id)
     {
         //Here in leftJoin ('tableToJoinName','tableToJoinName.PK','=','tableWhereJoiningName.FK of tableToJoinName');
-        $myorders = Order::join('products','products.id','=','orders.product_id')->where('customer_id',$id)->get(['products.*','orders.*','orders.created_at as ordered_date','products.id as productId']);
-        return view('orders.show',compact('myorders'));
+        $myorders = Order::join('products', 'products.id', '=', 'orders.product_id')->where('customer_id', $id)->get(['products.*', 'orders.*', 'orders.created_at as ordered_date', 'products.id as productId']);
+        return view('orders.show', compact('myorders'));
     }
 
     public function cancel()
@@ -75,15 +96,15 @@ class OrderController extends Controller
 
     public function detail($id)
     {
-        $reviews = Review::where('customer_id','=',Auth::user()->id)->where('product_id','=',$id)->get();
+        $reviews = Review::where('customer_id', '=', Auth::user()->id)->where('product_id', '=', $id)->get();
         // dd($reviews);
-        $order = Order::join('products','products.id','=','orders.product_id')
-        ->where('products.id','=',$id)
-        ->where('orders.customer_id','=',Auth::user()->id)
-        ->select(['products.*','orders.*','orders.created_at as ordered_date','products.id as productId','orders.id as orderId'])->first();
+        $order = Order::join('products', 'products.id', '=', 'orders.product_id')
+            ->where('products.id', '=', $id)
+            ->where('orders.customer_id', '=', Auth::user()->id)
+            ->select(['products.*', 'orders.*', 'orders.created_at as ordered_date', 'products.id as productId', 'orders.id as orderId'])->first();
         // dd($order);
         $reviewCount = $reviews->count();
         // dd($reviewCount);
-        return view('orders.detail',compact('order','reviews','reviewCount'));
+        return view('orders.detail', compact('order', 'reviews', 'reviewCount'));
     }
 }

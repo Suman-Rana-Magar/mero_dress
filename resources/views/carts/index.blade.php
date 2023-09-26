@@ -66,6 +66,10 @@
 <div class="alert alert-success" style="width: 400px; margin: auto;">
     {{ session('success') }}
 </div>
+@elseif(session('error'))
+<div class="alert alert-danger" style="width: auto; max-width:90%; margin: auto;">
+    {{ session('error') }}
+</div>
 @endif
 
 @else

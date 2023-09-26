@@ -66,7 +66,7 @@
             <h2 class="text-center mt-4" style="padding-top: 20px; font-family: Courier, monospace; color: black;">Please Enter your Address</h2><br>
             <div class="input-group" style="width: 90%; height:auto;">
                 <label for="address" class="input-group-text"><i class="fa-solid fa-location-dot"></i></label>
-                <input id="address" type="text" name="address" class="form-control @error('address') is-invalid @enderror" placeholder="Format: पालिका-वार्ड नं.,टोल,जिल्ला            E.g.: Swyoyambhu-15,Bijeshwori,Kathmandu" value="{{old('address')}}">
+                <input id="address" type="text" name="address" class="form-control @error('address') is-invalid @enderror" placeholder="E.g.: Swyoyambhu-15,Bijeshwori,Kathmandu" value="{{old('address')}}">
                 @error('address')
                 <span style="text-align: left; margin-left: 35px;" class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
