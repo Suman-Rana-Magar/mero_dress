@@ -64,7 +64,10 @@ class UserController extends Controller
         });
         //return redirect("/products")   
         // View::make('verification.email',compact('user_id','email_verification_token'));
-        return view('verification.show', compact('user_id'));
+        // return view('verification.show', compact('user_id'));
+        return back()->with([
+            'success'=>'Verification link sent to your email , verify it and log in !',
+        ]);
         // return (new MailMessage)
         //     ->subject('Verify Email Address')
         //     ->line('Click the button given below to verity your email address !')
