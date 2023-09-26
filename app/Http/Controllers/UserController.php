@@ -66,7 +66,7 @@ class UserController extends Controller
         // View::make('verification.email',compact('user_id','email_verification_token'));
         // return view('verification.show', compact('user_id'));
         return back()->with([
-            'success'=>'Verification link sent to your email , verify it and log in !',
+            'success' => 'Verification link sent to your email , verify it and log in !',
         ]);
         // return (new MailMessage)
         //     ->subject('Verify Email Address')
@@ -81,22 +81,23 @@ class UserController extends Controller
             'password' => 'required',
         ]);
         if (Auth::attempt($check)) {
-            // session(['user_id' => Auth::user()->id]);
-            if (Auth::user()->email_verified == 1) {
-
-                if (Auth::user()->role == 'admin') {
+            $user = Auth::user();
+            $verified = $user->email_verified;
+            if ($verified == 1) {
+                // dd($verified);
+                if ($user->role == 'admin') {
+                    // dd($user->role);
                     return redirect()->route('admin.index');
                 }
+                // dd($user->role);
                 return redirect()->route('products.index');
             }
-            return Redirect::back()->withErrors([
-                'email' => 'Registered but unverified email, verity and try again !',
-            ]);
-        } else {
-            return back()->withErrors([
-                'email' => 'Incorrect Email or Password !',
-            ]);
+            // dd('unverified');
+            return redirect('/login')->with('error','Registered but unverified email, verify and try again !',);
         }
+        return back()->withErrors([
+            'email' => 'Incorrect Email or Password !',
+        ]);
     }
 
     public function show()

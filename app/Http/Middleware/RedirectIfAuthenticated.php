@@ -19,13 +19,14 @@ class RedirectIfAuthenticated
     public function handle(Request $request, Closure $next, string ...$guards): Response
     {
         $guards = empty($guards) ? [null] : $guards;
-
         foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
+            if (Auth::guard($guard)->check() && (Auth::user() && Auth::user()->email_verified == 1)) {
                 // session(['user_id' => auth()->guard()->id]);
                 // session(['ip_address' => request()->ip()]);
                 // session(['user_agent' => request()->userAgent()]);
+
                 return redirect(RouteServiceProvider::HOME);
+
             }
         }
 

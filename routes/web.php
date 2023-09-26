@@ -159,32 +159,33 @@ Route::middleware(['isAdmin'])->group(function () {
 
 //only guest accessible |-------------------------------------------------------------------------------------------------------
 
+
 Route::middleware(['guest'])->group(function () {
 
-    Route::get('/login', [UserController::class, 'index'])->name('users.index');
-
     Route::get('/register', [UserController::class, 'create'])->name('users.create');
+
+    Route::get('/login', [UserController::class, 'index'])->name('users.index');
 });
 
-Route::get('/admin/reviews/customer-review',[AdminController::class,'review'])->name('admin.review');
+Route::get('/admin/reviews/customer-review', [AdminController::class, 'review'])->name('admin.review');
 
-Route::get('/orders/detail/{id}',[OrderController::class,'detail'])->name('orders.detail');
+Route::get('/orders/detail/{id}', [OrderController::class, 'detail'])->name('orders.detail');
 
 
 //review
 
-Route::get('/reviews/create/{p_id}',[ReviewController::class,'create'])->name('reviews.create');
+Route::get('/reviews/create/{p_id}', [ReviewController::class, 'create'])->name('reviews.create');
 
-Route::get('/reviews/cancel-reviewing/',[ReviewController::class,'cancel'])->name('reviews.cancel');
+Route::get('/reviews/cancel-reviewing/', [ReviewController::class, 'cancel'])->name('reviews.cancel');
 
-Route::post('/reviews/{p_id}',[ReviewController::class,'store'])->name('reviews.store');
+Route::post('/reviews/{p_id}', [ReviewController::class, 'store'])->name('reviews.store');
 
-Route::get('/reviews/allow/reviews/{id}',[ReviewController::class,'update'])->name('reviews.update');
+Route::get('/reviews/allow/reviews/{id}', [ReviewController::class, 'update'])->name('reviews.update');
 
-Route::get('/reviews/deny/{id}/reviews',[ReviewController::class,'destroy'])->name('reviews.destroy');
+Route::get('/reviews/deny/{id}/reviews', [ReviewController::class, 'destroy'])->name('reviews.destroy');
 
-Route::get('/verify-email',[VerificationController::class,'show'])->name('verification.notice');
+Route::get('/verify-email', [VerificationController::class, 'show'])->name('verification.notice');
 
-Route::get('/verity-email/{id}/{hash}',[VerificationController::class,'verify'])->name('verification.verify');
+Route::get('/verity-email/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
 
-Route::get('/verify-email/resend/{id}',[VerificationController::class,'resend'])->name('verification.resend');
+Route::get('/verify-email/resend/{id}', [VerificationController::class, 'resend'])->name('verification.resend');
