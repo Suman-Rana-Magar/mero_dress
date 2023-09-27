@@ -257,7 +257,7 @@
                     </li>
                 </ul>
 
-                <input class="form-control mr-sm-2" name="search" type="search" placeholder="Name of Product" aria-label="Search" value="{{ Request::get('search') }}">
+                <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search Product Here" aria-label="Search" value="{{ Request::get('search') }}">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 @if(Auth::user())
                 <a href="{{route('users.show')}}">
