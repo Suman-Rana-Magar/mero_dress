@@ -17,6 +17,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            background: linear-gradient(to right, #c04848, #480048);
+
         }
 
         .main {
@@ -25,6 +27,8 @@
             border-color: dimgrey;
             border-radius: 20px;
             width: 50%;
+            background-color: ghostwhite;
+
         }
 
         .submit {
