@@ -55,7 +55,7 @@
         <th></th>
         <th>Balance: {{ $balance }}</th>
         <th>Overall</th>
-        <th>Date</th>
+        <th>—</th>
         </tr>
     </tbody>
 </table>

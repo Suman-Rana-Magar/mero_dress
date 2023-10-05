@@ -174,7 +174,7 @@
 
     #droplink {
         width: auto;
-        padding-right: 30px;
+        padding-right: 50px;
     }
 </style>
 
@@ -204,7 +204,7 @@
                             $categories = App\Models\Category::orderBy('name')->get();
                             $selectedCategory = session('selectedCategory', 'Category');
                             @endphp
-                            <a id="title" href="#" style="padding-top: 8px; transition: .3s;">
+                            <a id="title" href="" style="padding-top: 8px; transition: .3s;">
                             Category
                             </a>
                             <ul style="background: linear-gradient(#c04848, #480048);">
@@ -276,11 +276,11 @@
 
     <footer style="background-color: #3A3B3C; margin-top: 20px;" class="foot">
         <center>
-            <h3 style="color: white;"><u>Follow Us On</u></h3>
+            <h3 style="color: white;">Follow Us On</h3>
             <div class="links">
-                <a href="https://www.facebook.com/nabin.lamsal.737"><i class="fa-brands fa-facebook"></i></a>
-                <a href="https://www.instagram.com/nabinlamsal99"><i class="fa-brands fa-square-instagram"></i></a>
-                <a href="https://twitter.com/nabinlamsal99"><i class="fa-brands fa-twitter"></i></a>
+                <a href=""><i class="fa-brands fa-facebook"></i></a>
+                <a href=""><i class="fa-brands fa-square-instagram"></i></a>
+                <a href=""><i class="fa-brands fa-twitter"></i></a>
             </div>
             <h6 style="margin-bottom: 0; padding-bottom: 20px; color: white; text-align: center;">&copy; All rights reserved</h6>
         </center>

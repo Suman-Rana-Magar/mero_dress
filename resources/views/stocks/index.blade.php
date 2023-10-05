@@ -20,7 +20,7 @@
         <th>Product ID</th>
         <th>Product Name</th>
         <th>Product Quantity(Total)</th>
-        <th>Product Quantity(Remaining)</th>
+        <!-- <th>Product Quantity(Remaining)</th> -->
         <th>Actions</th>
     </thead>
     <tbody>
@@ -30,7 +30,7 @@
             <td>{{ $stock->productId }}</td>
             <td>{{ $stock->title }}</td>
             <td>{{ $stock->product_quantity }}</td>
-            <td>बाँकी</td>
+            <!-- <td>बाँकी</td> -->
             <td>
                 <a style="margin-left: 20px;" href="{{route('stocks.show',$stock->productId)}}" title="See More"><i style="font-size: 25px;" class="fa-solid fa-circle-chevron-right"></i></a>
             </td>
