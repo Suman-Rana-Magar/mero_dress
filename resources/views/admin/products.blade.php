@@ -51,10 +51,10 @@
             <td></td>
             <td></td>
             <td></td>
-            <td style="color: blue;">To Insert Product</td>
-            <td style="color: blue;">Click <i style="font-size: 25px; color: limegreen;" class="fa-regular fa-hand-point-up fa-rotate-90"></i></td>
+            <td style="color: blue;"></td>
+            <td style="color: blue;"></i></td>
             <td>
-                <a href="{{route('products.create')}}"><i style="font-size: 30px;" class="fa-solid fa-download"></i></a>
+                <a href="{{route('products.create')}}"><i style="font-size: 30px;" class="fa-solid fa-download" title="Insert New Product"></i></a>
             </td>
         </tr>
     </tbody>

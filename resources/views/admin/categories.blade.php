@@ -32,10 +32,10 @@
         </tr>
         @endforeach
         <tr>
-            <td style="color: blue;">To Insert Category</td>
-            <td style="color: blue;">Click <i style="font-size: 25px; color: limegreen;" class="fa-regular fa-hand-point-up fa-rotate-90"></i></td>
+            <td style="color: blue;"></td>
+            <td style="color: blue;"></i></td>
             <td>
-                <a href="{{route('categories.create')}}"><i style="font-size: 30px;" class="fa-solid fa-download"></i></a>
+                <a href="{{route('categories.create')}}"><i style="font-size: 30px;" class="fa-solid fa-download" title="Insert New Category"></i></a>
             </td>
         </tr>
     </tbody>
