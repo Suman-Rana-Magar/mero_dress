@@ -91,7 +91,7 @@
                                         <button type="submit" class="btn btn-info btn-block btn-lg gradient-custom-4 text-body">Login</button>
                                     </div>
 
-                                    <p class="text-center text-muted mt-5 mb-0">Don't Have an account? <a href="{{route('users.create')}}"><u>Login here</u></a></p>
+                                    <p class="text-center text-muted mt-5 mb-0">Don't Have an account? <a href="{{route('users.create')}}"><u>Register here</u></a></p>
 
                                 </form>
 
