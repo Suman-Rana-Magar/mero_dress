@@ -8,6 +8,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <title>Review</title>
     <style>
+        body
+        {
+            background-color: #63cee0;
+        }
         #main {
             margin-left: auto;
             margin-right: auto;
@@ -15,6 +19,7 @@
             border-radius: 20px;
             width: 40%;
             margin-top: 20px;
+            background-color: #f0f0f0;
         }
         #input-field
         {

@@ -8,6 +8,11 @@
 
     <title>Customer Register</title>
     <style>
+        body {
+            /* background-color: #63cee0; */
+            background-image: url("{{ asset('images/blue_background.jpg') }}");
+        }
+
         .pagetitle {
             text-align: center;
         }
@@ -17,7 +22,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(to right, #c04848, #480048);
         }
 
         .main {
@@ -42,75 +46,85 @@
 
 <body>
     @if (session('success'))
-    <div class="alert alert-success" style="width: 50%; text-align: center; margin: auto; margin-top: 50px; margin-bottom: -50px;">
+    <div class="alert alert-success" style="width: 45%; text-align: center; margin: auto;">
         {{ session('success') }}
     </div>
     @elseif(session('error'))
-    <div class="alert alert-danger" style="width: 50%; text-align: center; margin: auto; margin-top: 50px; margin-bottom: -50px;">
+    <div class="alert alert-danger" style="width: 45%; text-align: center; margin: auto;">
         {{ session('error') }}
     </div>
     @endif
-    <div class="supermain">
-        <div id="main" class="main">
-            <div class="pagetitle">
-                <h1>User Registration</h1>
+    <section class="vh-100 bg-image">
+        <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+            <div class="container h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                        <div class="card" style="border-radius: 15px;">
+                            <div class="card-body p-5">
+                                <h2 class="text-uppercase text-center mb-5">User Registration</h2>
+
+                                <form method="post" action="{{route('users.store')}}" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example1cg">Your Name</label>
+                                        <input type="text" id="form3Example1cg" class="form-control form-control-lg @error('name') is-invalid @enderror" name="name" value="{{old('name')}}" />
+                                        @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example3cg">Your Email</label>
+                                        <input type="email" id="form3Example3cg" class="form-control form-control-lg @error('email') is-invalid @enderror" name="email" value="{{old('email')}}" />
+                                        @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label for="image" class="form-label">Profile Picture</label>
+                                        <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
+                                        @error('image')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example4cg">Password</label>
+                                        <input type="password" id="form3Example4cg" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" value="{{old('password')}}" />
+                                        @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example4cdg">Repeat your password</label>
+                                        <input type="password" id="form3Example4cdg" class="form-control form-control-lg" name="password_confirmation" value="{{old('password_confirmation')}}" />
+                                    </div>
+
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-info btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                                    </div>
+
+                                    <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!" class="fw-bold text-body"><a href="{{route('users.index')}}"><u>Login here</u></a></a></p>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <form method="post" action="{{route('users.store')}}" enctype="multipart/form-data">
-                @csrf
-
-                <div class="mb-3" id="input-field">
-                    <label for="uname" class="form-label">Username</label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="uname" aria-describedby="emailHelp" name="name" value="{{old('name')}}">
-                    @error('name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-
-                <div class="mb-3" id="input-field">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" aria-describedby="emailHelp" name="email" value="{{old('email')}}">
-                    @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-
-                <div class="mb-3" id="input-field">
-                    <label for="image" class="form-label">Profile Picture</label>
-                    <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
-                    @error('image')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-
-                <div class="mb-3" id="input-field">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" aria-describedby="emailHelp" name="password" value="{{old('password')}}">
-                    @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-
-                <div class="mb-3" id="input-field">
-                    <label for="cpassword" class="form-label">Confirm Password</label>
-                    <input type="password" class="form-control" id="cpassword" name="password_confirmation" value="{{old('password_confirmation')}}">
-                </div>
-
-                <div class="submit">
-                    <button type="submit" class="btn btn-primary">Register</button>
-                    <h6 style="margin-top: 10px;">Already Have An Account? <a href="{{route('users.index')}}">Login</a></h6>
-                </div>
-
-            </form>
         </div>
-    </div>
+    </section>
 </body>
 
 </html>

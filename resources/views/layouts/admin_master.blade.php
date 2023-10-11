@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <link rel="shortcut icon" href="{{ asset('images/llooggoo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('images/dress.png') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
@@ -111,7 +111,7 @@
     <!-- Sidebar -->
     <nav id="sidebar">
         <a style="text-decoration: none;" href="{{route('admin.index')}}">
-            <div><h1 class="first">ल</h1><h2 class="one">गा</h2><h2 class="two">उ</h2><h2 class="three">ने</h2></div>
+            <div><h1 class="first">मेरो</h1><h2 class="one">Dr</h2><h2 class="two">e</h2><h2 class="three">ss</h2></div>
         </a>
         <ul class="list-unstyled components">
             <li>

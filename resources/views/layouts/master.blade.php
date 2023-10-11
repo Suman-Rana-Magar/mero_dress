@@ -2,11 +2,10 @@
 <html lang="en">
 
 <head>
-    <link rel="shortcut icon" href="{{ asset('images/llooggoo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('images/dress.png') }}">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{asset('storage/lagauney.png')}}" rel="icon">
     <title>@yield('title')</title>
     <link rel="stylesheet" href="product_detail.html">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -19,13 +18,18 @@
 </head>
 <style>
     body {
-        background: linear-gradient(to right, #c04848, #480048);
-        /* background-color: #ab2b2b; */
+        /* background: linear-gradient(to right, #c04848, #480048); */
+        background-color: #63cee0;
+    }
+
+    .navbar
+    {
+        background-color: #00a7c4;
     }
 
     nav {
-        background: linear-gradient(to bottom, #c04848, #480048);
-        /* background-color: lightblue; */
+        /* background: linear-gradient(to bottom, #c04848, #480048); */
+        background: transparent;
     }
 
     .nav-link {
@@ -78,25 +82,30 @@
         color: #07e5f5;
     }
 
-    .logo .one {
+    .logo #one {
         font-family: 'Kalam';
         color: white;
         display: inline;
         color: #07f51f;
     }
 
-    .logo .two {
+    .logo #two {
         font-family: 'Kalam';
         color: white;
         display: inline;
         color: #e5f507;
     }
 
-    .logo .three {
+    .logo #three {
         font-family: 'Kalam';
         color: white;
         display: inline;
         color: #ba07f5;
+    }
+
+    .logo .all
+    {
+        text-shadow: 2px 2px 2px #21739c;
     }
 
     /* For dropdown */
@@ -179,17 +188,17 @@
 </style>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg">
         <!--<a class="navbar-brand" href="#">Navbar</a>-->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <a style="text-decoration: none;" href="{{route('products.index')}}">
             <div class="logo">
-                <h1>ल</h1>
-                <h2 class="one">गा</h2>
-                <h2 class="two">उ</h2>
-                <h2 class="three">ने</h2>
+                <h1 class="all">मेरो</h1>
+                <h2 class="all" id="one">Dr</h2>
+                <h2 class="all" id="two">e</h2>
+                <h2 class="all" id="three">ss</h2>
             </div>
         </a>
         <div style="margin-left: 250px;" class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -207,7 +216,7 @@
                             <a id="title" href="" style="padding-top: 8px; transition: .3s;">
                             Category
                             </a>
-                            <ul style="background: linear-gradient(#c04848, #480048);">
+                            <ul style="background: #00a7c4;">
                                 @foreach($categories as $category)
                                 @php
                                 $CatName = $category->name;
@@ -258,7 +267,7 @@
                 </ul>
 
                 <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search Product Here" aria-label="Search" value="{{ Request::get('search') }}">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <button style="padding: 8px;" class="btn btn-info" type="submit"><i style="font-size: 20px;" class="fa-solid fa-magnifying-glass"></i></button>
                 @if(Auth::user())
                 <a href="{{route('users.show')}}">
                     <img style="height: 40px; width: 40px; margin-left: 10px; border-radius: 19.5px;" src='{{asset("storage/" . Auth::user()->profile)}}' alt="Profile" title="Profile">

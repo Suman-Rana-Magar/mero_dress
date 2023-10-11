@@ -11,11 +11,10 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #63cee0;
         }
 
         .main {
-
             text-align: center;
         }
 
@@ -34,6 +33,7 @@
             border-radius: 50%;
             object-fit: cover;
             margin: 0 auto 20px;
+            
         }
 
         .user-details {
@@ -62,7 +62,7 @@
 </head>
 
 <body>
-    <div style="width: 50%; border-style: groove; margin: 20px 25%; border-radius: 25px;">
+    <div style="width: 50%; border-style: groove; margin: 20px 25%; border-radius: 25px; background-color: #f0f0f0;">
         <form method="post" action="{{route('users.update',Auth::user()->id)}}" enctype="multipart/form-data">
             @csrf
             <div style="margin-top: 10px;" class="mb-3" id="input-field">

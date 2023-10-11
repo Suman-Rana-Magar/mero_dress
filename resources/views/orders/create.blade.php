@@ -19,7 +19,7 @@
         }
 
         body {
-            background: linear-gradient(to right, #c04848, #480048);
+            background-color: #63cee0;
         }
     </style>
 </head>

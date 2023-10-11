@@ -11,7 +11,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #63cee0;
         }
 
         .main {
@@ -81,7 +81,7 @@
 </head>
 
 <body>
-    <a href="{{route('products.index')}}"><button type="button" style="margin: 10px;" class="btn btn-outline-info"><i class="fa-solid fa-arrow-left-long"></i></button></a>
+    <a href="{{route('products.index')}}"><button type="button" style="margin: 10px;" class="btn btn-outline-primary"><i class="fa-solid fa-arrow-left-long"></i></button></a>
     <div class="main">
         <div class="profile-container">
             <img class="profile-picture" src='{{asset("storage/" . Auth::user()->profile)}}' alt="User Profile Picture">

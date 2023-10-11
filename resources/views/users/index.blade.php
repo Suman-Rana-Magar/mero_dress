@@ -8,6 +8,10 @@
 
     <title>Customer Login</title>
     <style>
+        body {
+            background-image: url("{{ asset('images/blue_background.jpg') }}");
+        }
+
         .pagetitle {
             text-align: center;
         }
@@ -17,7 +21,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(to right, #c04848, #480048);
 
         }
 
@@ -53,43 +56,52 @@
         {{ session('error') }}
     </div>
     @endif
-    <div class="supermain">
-        <div id="main" class="main">
-            <div class="pagetitle">
-                <h1>User Login</h1>
+    <section class="vh-100 bg-image">
+        <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+            <div class="container h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                        <div class="card" style="border-radius: 15px;">
+                            <div class="card-body p-5">
+                                <h2 class="text-uppercase text-center mb-5">User Login</h2>
+
+                                <form method="post" action="{{route('users.check')}}" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example3cg">Your Email</label>
+                                        <input type="email" id="form3Example3cg" class="form-control form-control-lg @error('email') is-invalid @enderror" name="email" value="{{old('email')}}" />
+                                        @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example4cg">Password</label>
+                                        <input type="password" id="form3Example4cg" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" value="{{old('password')}}" />
+                                        @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-info btn-block btn-lg gradient-custom-4 text-body">Login</button>
+                                    </div>
+
+                                    <p class="text-center text-muted mt-5 mb-0">Don't Have an account? <a href="{{route('users.create')}}"><u>Login here</u></a></p>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <form method="post" action="{{route('users.check')}}" enctype="multipart/form-data">
-                @csrf
-
-                <div class="mb-3" id="input-field">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" aria-describedby="emailHelp" name="email" value="{{old('email')}}">
-                    @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-
-                <div class="mb-3" id="input-field">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" aria-describedby="emailHelp" name="password" value="{{old('password')}}">
-                    @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-
-                <div class="submit">
-                    <button type="submit" class="btn btn-primary">Login</button>
-                    <h6 style="margin-top: 10px;">Don't Have An Account? <a href="{{route('users.create')}}">Register</a></h6>
-                </div>
-
-
-            </form>
         </div>
-    </div>
+    </section>
 </body>
 
 </html>
