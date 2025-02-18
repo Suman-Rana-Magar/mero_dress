@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            if (!Schema::hasColumn('users','profile'))
-                $table->string('profile')->after('email');
+            if(!Schema::hasColumn('users','email_verified')) {
+                $table->smallInteger('email_verified')->default(0);
+            }
         });
     }
 
@@ -23,7 +24,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            if(Schema::hasColumn('users','email_verified')) {
+                $table->dropColumn('email_verified');
+            }
         });
     }
 };
